@@ -10,13 +10,13 @@ public class FilterLinesJava8 {
 
     public void filter()
             throws IOException {
-        final List<String> lines = Files.readAllLines(Paths.get("/a/b"));
+        final List<String> lines = Files.readAllLines(Paths.get("source.txt"));
 
         final List<String> filtered = lines.stream()
-                                           .filter(line -> line.contains("foobar"))
+                                           .filter(line -> line.contains("Bad credentials"))
                                            .collect(Collectors.toList());
 
-        Files.write(Paths.get("/a/c"), filtered);
+        Files.write(Paths.get("output.txt"), filtered);
     }
 
 }
