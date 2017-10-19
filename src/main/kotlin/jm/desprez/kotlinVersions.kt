@@ -12,16 +12,16 @@ class KotlinVersion(private val rootElement: Element) : XMLNavigator {
 class KotlinRecursiveVersion(private val rootElement: Element) : XMLNavigator {
 
     private fun navigate(tagNames: List<String>): Element? {
-        fun acc(current: Element?, acc: Element, tagNames: List<String>): Element? =
+        fun acc(current: Element?, tagNames: List<String>): Element? =
                 when {
                     current == null -> null
-                    tagNames.isEmpty -> acc
+                    tagNames.isEmpty -> current
                     else -> {
                         val newCurrent = current.getChild(tagNames.head())
-                        acc(newCurrent, current, tagNames.tail())
+                        acc(newCurrent, tagNames.tail())
                     }
                 }
-        return acc(rootElement, rootElement, tagNames)
+        return acc(rootElement, tagNames)
     }
 
     override fun getPromotedBuild(): Element? = navigate(List.of("config", "plugins", "promote"))
