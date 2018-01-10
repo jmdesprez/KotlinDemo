@@ -1,3 +1,4 @@
+@file:JvmName("Toolbox")
 package jm.desprez
 
 import io.vavr.collection.List
